@@ -59,7 +59,7 @@ tmp = function () {
 				x = 0;
 				y = 0;
 				bounds = newbitmap.getBounds();
-				ratio = (bounds.height > bounds.width)?(this.height / bounds.height):(this.width / bounds.width);
+				ratio = (bounds.height/bounds.width > this.height/this.width)?(this.height / bounds.height):(this.width / bounds.width);
 				width = Math.floor(bounds.width * ratio);
 				height = Math.floor(bounds.height * ratio);
 				if (height > width) {
