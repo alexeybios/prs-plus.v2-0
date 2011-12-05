@@ -31,6 +31,7 @@
 //	2011-10-29 Mark Nord - Added keyCodes for holding Volume+, Volume-, Home and Size (needs patched ebookSystem.so)
 //	2011-10-29 Ben Chenoweth - Added Option and Hold Option to key bindings
 //	2011-11-05 kartu - Shifted BF,BH and games to the bottom of "More" list
+//	2011-12-06 quisvir - Removed BH & BF from customNodes to avoid duplication in More Applications (issue #237)
 
 return {
 	// Menu icon indices 
