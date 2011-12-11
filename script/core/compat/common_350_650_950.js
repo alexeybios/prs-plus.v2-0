@@ -33,6 +33,7 @@
 //	2011-11-15 kartu - Yet another fix to SD/MS card scanning
 //	2011-17-14 kartu - Removed debug statement
 //	2011-12-05 quisvir - Fixed node comments if node.comment is undefined
+//	2011-12-11 kartu - Fixed #244 books deleted using PC do not dissapear if scanning is "disabled (load cache)"
 //
 tmp = function () {
 	var localizeKeyboardPopups, updateSiblings, localize, localizeKeyboard, oldSetLocale, 
@@ -510,12 +511,13 @@ tmp = function () {
 						// We are right after boot, addons haven't been loaded yet, need to load the value manually
 						// load settings from BookHistory settings file
 						settingsFile = Core.config.settingsPath + "BrowseFolders.config";
-						optionsCode = PARAMS.getFileContent(settingsFile);
-	
-						if (optionsCode !== null) {
-							optionsCode = new Function("", optionsCode);
-							options = optionsCode();
-							scanMode = options.cardScan;
+						if (FileSystem.getFileInfo(settingsFile)) {
+							optionsCode = PARAMS.getFileContent(settingsFile);
+							if (optionsCode !== "") {
+								optionsCode = new Function("", optionsCode);
+								options = optionsCode();
+								scanMode = options.cardScan;
+							}
 						}
 						
 						if (scanMode === undefined) {
@@ -541,7 +543,7 @@ tmp = function () {
 	FskCache._diskSource.synchronizeCallback = function() {
 		var scanMode = PARAMS.Core.config.cardScanMode;
 		try {
-			if (scanMode === "disabledLoadCache") {
+			if (scanMode === "disabledLoadCache" && this.target.name !== "mediaPath") {
 				this.target.synchronizedSource();
 				this.target.synchronizeDone();
 				this.stack.pop();

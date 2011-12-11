@@ -36,6 +36,7 @@
 //	2011-11-14 kartu - ALL: Fixed #214 MSG_COPYING_BOOK not translated
 //	2011-11-15 Mark Nord - ALL: Fixed Fix #214 there is another one in Line 248
 //	2011-11-20 kartu - Fixed #215 fb2epub converter doesn't work with cards with disabled scanning
+//	2011-12-12 kartu - Changed mounted card order to SD/MS from MS/SD
 //
 
 tmp = function() {
@@ -460,15 +461,6 @@ tmp = function() {
 				
 				// Add "via mount" nodes
 				if (BrowseFolders.options.useMount === ENABLED) {
-					if (FileSystem.getFileInfo("a:/")) {
-						nodes.push(createFolderNode(
-							Core.shell.MS_MOUNT_PATH, 
-							L("NODE_MEMORY_STICK_MOUNT"), 
-							this, 
-							"MS",
-							Core.shell.MS
-						));
-					}
 					if (FileSystem.getFileInfo("b:/")) {
 						nodes.push(createFolderNode(
 							Core.shell.SD_MOUNT_PATH, 
@@ -476,6 +468,15 @@ tmp = function() {
 							this, 
 							"SD",
 							Core.shell.SD
+						));
+					}
+					if (FileSystem.getFileInfo("a:/")) {
+						nodes.push(createFolderNode(
+							Core.shell.MS_MOUNT_PATH, 
+							L("NODE_MEMORY_STICK_MOUNT"), 
+							this, 
+							"MS",
+							Core.shell.MS
 						));
 					}
 				}
