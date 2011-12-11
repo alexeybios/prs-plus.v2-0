@@ -32,6 +32,7 @@
 //	2011-10-29 Ben Chenoweth - Added Option and Hold Option to key bindings
 //	2011-11-05 kartu - Shifted BF,BH and games to the bottom of "More" list
 //	2011-12-06 quisvir - Removed BH & BF from customNodes to avoid duplication in More Applications (issue #237)
+//	2011-12-06 kartu - (try 2) Removed BH & BF from customNodes to avoid duplication in More Applications (issue #237)
 
 return {
 	// Menu icon indices 
@@ -200,8 +201,6 @@ return {
 			{ name: "collections", parent: "more" },
 			{ name: "notes", parent: "more"},
 			{ name: "PRSPSettings", parent: "more" },
-			{ name: "BookHistory", parent: "more"},
-			{ name: "BrowseFolders", parent: "more"},
 			{ name: "Calculator", parent: "more" },
 			{ name: "Calendar", parent: "more" },
 			{ name: "games", parent: "more" },
