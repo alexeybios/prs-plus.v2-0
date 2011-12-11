@@ -116,7 +116,7 @@ History:
 		
 		<!-- Clear read only attribute from runonce.sh -->
 		<attrib archive="true" verbose="true">
-			<fileset dir="../installer/data/runonce.sh" />
+			<fileset file="../installer/data/runonce.sh" />
 		</attrib>
 
 
