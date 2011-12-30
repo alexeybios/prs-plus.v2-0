@@ -34,6 +34,7 @@
 //	2011-17-14 kartu - Removed debug statement
 //	2011-12-05 quisvir - Fixed node comments if node.comment is undefined
 //	2011-12-11 kartu - Fixed #244 books deleted using PC do not dissapear if scanning is "disabled (load cache)"
+//	2011-12-30 quisvir - Added scaling option due to popular demand
 //
 tmp = function () {
 	var localizeKeyboardPopups, updateSiblings, localize, localizeKeyboard, oldSetLocale, 
@@ -60,14 +61,21 @@ tmp = function () {
 				window.fillRectangle(0, 0, this.width, this.height);
 				x = 0;
 				y = 0;
-				bounds = newbitmap.getBounds();
-				ratio = (bounds.height/bounds.width > this.height/this.width)?(this.height / bounds.height):(this.width / bounds.width);
-				width = Math.floor(bounds.width * ratio);
-				height = Math.floor(bounds.height * ratio);
-				if (height > width) {
-					x = Math.floor((this.width - width) / 2);
-				} else {
-					y = Math.floor((this.height - height) / 2);
+				switch (Core.addonByName.StandbyImage.options.ScalingMethod) {
+					case 'keepaspect':
+						bounds = newbitmap.getBounds();
+						ratio = (bounds.height/bounds.width > this.height/this.width)?(this.height / bounds.height):(this.width / bounds.width);
+						width = Math.floor(bounds.width * ratio);
+						height = Math.floor(bounds.height * ratio);
+						if (height > width) {
+							x = Math.floor((this.width - width) / 2);
+						} else {
+							y = Math.floor((this.height - height) / 2);
+						}
+						break;
+					case 'stretch':
+						width = this.width;
+						height = this.height;
 				}
 				ditheredBitmap = newbitmap.dither(dither);
 				newbitmap.close();

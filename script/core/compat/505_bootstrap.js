@@ -20,6 +20,7 @@
 //				could be avoided with inverse code in doResume(), but then resume will take noticeable longer
 //	2011-10-09 Mark Nord - 	preserve ascept-ratio for cover-pages (using code from quisvir)
 //	2011-10-11 Mark Nord -  code tidying for cover/wallpaper on standby 
+//	2011-12-30 quisvir - Added scaling option due to popular demand
 
 var tmp = function() {
 	var oldReadPreference, oldCallback, bootLog;
@@ -178,12 +179,19 @@ var tmp = function() {
 					window.fillRectangle(0, 0, 600, 800);
 					x = 0;
 					y = 0;
-					bounds = bitmap.getBounds();
-					ratio = (bounds.height/bounds.width > 800/600)?(800 / bounds.height):(600 / bounds.width);
-					width = Math.floor(bounds.width * ratio);
-					height = Math.floor(bounds.height * ratio);
-					if (height > width) x = Math.floor((600 - width) / 2);
-					else y = Math.floor((800 - height) / 2);					
+					switch (Core.addonByName.StandbyImage.options.ScalingMethod) {
+						case 'keepaspect':
+							bounds = bitmap.getBounds();
+							ratio = (bounds.height/bounds.width > 800/600)?(800 / bounds.height):(600 / bounds.width);
+							width = Math.floor(bounds.width * ratio);
+							height = Math.floor(bounds.height * ratio);
+							if (height > width) x = Math.floor((600 - width) / 2);
+							else y = Math.floor((800 - height) / 2);
+							break;
+						case 'stretch':
+							width = 600;
+							height = 800;
+					}
 					ditheredBitmap = bitmap.dither(dither);
 					bitmap.close();
 					if (ditheredBitmap) {

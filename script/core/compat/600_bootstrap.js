@@ -32,6 +32,7 @@
 //	2011-10-11 Ben Chenoweth - Further fix for cover/wallpaper on standby & code tidying.
 //	2011-11-04 kartu - Added Turkish
 //	2011-11-14 kartu - Fixed #207 Collection sorting is broken for cyrillic
+//	2011-12-30 quisvir - Added scaling option due to popular demand
 //
 //-----------------------------------------------------------------------------------------------------
 // Localization related code is model specific.  
@@ -349,12 +350,19 @@ var tmp = function() {
 					window.fillRectangle(0, 0, this.width, this.height);
 					x = 0;
 					y = 0;
-					bounds = bitmap.getBounds();
-					ratio = (bounds.height/bounds.width > this.height/this.width)?(this.height / bounds.height):(this.width / bounds.width);
-					width = Math.floor(bounds.width * ratio);
-					height = Math.floor(bounds.height * ratio);
-					if (height > width) x = Math.floor((this.width - width) / 2);
-					else y = Math.floor((this.height - height) / 2);					
+					switch (Core.addonByName.StandbyImage.options.ScalingMethod) {
+						case 'keepaspect':
+							bounds = bitmap.getBounds();
+							ratio = (bounds.height/bounds.width > this.height/this.width)?(this.height / bounds.height):(this.width / bounds.width);
+							width = Math.floor(bounds.width * ratio);
+							height = Math.floor(bounds.height * ratio);
+							if (height > width) x = Math.floor((this.width - width) / 2);
+							else y = Math.floor((this.height - height) / 2);
+							break;
+						case 'stretch':
+							width = this.width;
+							height = this.height;
+					}
 					ditheredBitmap = bitmap.dither(dither);
 					bitmap.close();
 					if (ditheredBitmap) {

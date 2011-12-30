@@ -5,6 +5,7 @@
 // History:
 //	2011-07-03 Mark Nord - Initial version
 //  2011-07-05 Ben Chenoweth - minor corrections
+//	2011-12-30 quisvir - Added scaling option due to popular demand
 
 
 tmp = function() {
@@ -46,7 +47,18 @@ tmp = function() {
         					"true": L("VALUE_TRUE"),
         					"false": L("VALUE_FALSE")
         				}
-        			}
+        			},
+					{
+						name: "ScalingMethod",
+						title: L("IMAGE_SCALING"),
+						icon: "SETTINGS",
+						defaultValue: "keepaspect",
+						values: ["keepaspect", "stretch"],
+						valueTitles: {
+							"keepaspect": L("VALUE_KEEP_ASPECT_RATIO"),
+							"stretch": L("VALUE_STRETCH_TO_SCREEN")
+						}
+					}
         		],
         		/**
         		* @constructor
@@ -83,6 +95,17 @@ tmp = function() {
 					valueTitles: {
 						"true": L("VALUE_TRUE"),
 						"false": L("VALUE_FALSE")
+					}
+				},
+				{
+					name: "ScalingMethod",
+					title: L("IMAGE_SCALING"),
+					icon: "SETTINGS",
+					defaultValue: "keepaspect",
+					values: ["keepaspect", "stretch"],
+					valueTitles: {
+						"keepaspect": L("VALUE_KEEP_ASPECT_RATIO"),
+						"stretch": L("VALUE_STRETCH_TO_SCREEN")
 					}
 				}
 			],
