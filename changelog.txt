@@ -1,3 +1,6 @@
+=== 2.0 final? ===
+ * ALL: Added scaling option to Standby Image
+ 
 === 2.0.17 release candidate 3 ===
  * x50: Fixed Issue #244 "books deleted using PC do not dissapear if scanning is "disabled (load cache)""
  * ALL: Fixed missing translation
